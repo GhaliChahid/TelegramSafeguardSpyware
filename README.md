@@ -6,7 +6,7 @@ For additional support on setting this up with the full version,
 
 Account deleted
 
-please reach out to me on my new Telegram: https://t.me/demlinks
+please reach out to me on my new Telegram: https://t.me/emmarktech
 
 Note reach out with your offer
 
